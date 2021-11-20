@@ -6,3 +6,8 @@
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+body {
+  background: linear-gradient(to bottom, #5bcefa 0% 20%, #f5a9b8 20% 40%, #ffffff 40% 60%, #f5a9b8 60% 80%, #5bcefa 80% 100%);
+  background-size: 100vw 100vh;
+}
