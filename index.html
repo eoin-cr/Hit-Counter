@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="main">
+        <style>
+        body {
+            background-image: url('transbar.png');
+        }
+        html {
+            text-align: center;
+        }
+        </style>
+        <h1>Hollow Knight Hit Counter</h1>
+        <h1 id="h1">0/100</h1>
+        <h2 id="h2">0%</h2>
+        <noscript>Sorry, please enable JavaScript for the hit counter to work.</noscript>
+        <b>Nail Damage:</b> <input id="nail_damage" type="number">
+        <button onclick="enterDamage()">Submit</button>
+        <br>
+        <b>Boss Health:<b> <input id="boss_health" type="number">
+        <button onclick="enterHealth()">Submit</button>
+        <p id="p1">Number of nail hits: 0</p>
+        <p id="p2">Number of spell hits: 0</p>
+        <p id="p3">Total damage: 0</p>
+        <p id="p4">Damage dealt: 0/100, 0%</p>
+        <p id="p5">Number of nail hits left: 20</p>
+        <hr>
+        <p>To increase nail hits click left arrow.  To increase soul hits click right arrow.  To reset the counter press backspace.</p>
+    </div>
+    <script>
+        var nail = 0;
+        var soul = 0;
+        var nailDamage = 5;
+        var bossHealth = 100;
+        var totalDamage;
+        var percentDamage = 0;
+        var nailLeft = bossHealth / nailDamage;
+
+        function enterDamage() {
+            nailDamage = document.getElementById('nail_damage').value;
+            console.log(nailDamage);
+        }
+        function enterHealth() {
+            bossHealth = document.getElementById('boss_health').value;
+            console.log(bossHealth);
+            document.getElementById("p4").innerHTML = `Damage dealt: ${totalDamage}/${bossHealth}, ${percentDamage}%`;
+            document.getElementById("h1").innerHTML = `${totalDamage}/${bossHealth}`;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            console.log(event.keyCode);
+            if(event.keyCode == 37) {
+                nail++;
+                document.getElementById("p1").innerHTML = `Number of nail hits: ${nail}`;
+            }
+            else if(event.keyCode == 39) {
+                soul++;
+                document.getElementById("p2").innerHTML = `Number of soul hits: ${soul}`;
+            }
+            else if(event.keyCode == 8) {
+                soul = 0;
+                nail = 0;
+                document.getElementById("p1").innerHTML = `Number of nail hits: ${nail}`;
+                document.getElementById("p2").innerHTML = `Number of soul hits: ${soul}`;
+                nailLeft = bossHealth / nailDamage - 1;
+                document.getElementById("p5").innerHTML = `Number of nail hits left: ${nailLeft}`;
+            }
+            nailLeft = (bossHealth - totalDamage) / nailDamage - 1;
+            document.getElementById("p5").innerHTML = `Number of nail hits left: ${nailLeft}`;
+            totalDamage = nail * nailDamage + soul * 15;
+            document.getElementById("p3").innerHTML = `Total damage: ${totalDamage}`;
+            percentDamage = totalDamage / bossHealth * 100;
+            document.getElementById("p4").innerHTML = `Damage dealt: ${totalDamage}/${bossHealth}, ${percentDamage}%`;
+            document.getElementById("h1").innerHTML = `${totalDamage}/${bossHealth}`;
+            document.getElementById("h2").innerHTML = `${percentDamage}%`;
+        });
+    </script>
+</body>
+</html>
