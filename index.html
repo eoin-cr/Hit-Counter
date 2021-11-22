@@ -28,6 +28,7 @@
         <p id="hitsRemaining"></p>
         <hr>
         <p>To increase nail hits click left arrow.  To increase soul hits click right arrow.  To reset the counter press backspace.</p>
+        <p>If the colours are not properly displaying, please turn off your adblocker (ublock origin seems to be the only one blocking them atm) as well as any dark mode extensions.  We'll try prevent this later but for now you'll just have to turn them off :) </p>
     </div>
     <script>
         var nail = 0;
@@ -35,10 +36,10 @@
         var nailDamage = localStorage.getItem("nailDamage") || 5;
         var bossHealth = 100;
         function clamp(num, min, max) {
-          return num <= min 
-            ? min 
-            : num >= max 
-              ? max 
+          return num <= min
+            ? min
+            : num >= max
+              ? max
               : num
         }
 
@@ -81,7 +82,7 @@
         window.addEventListener('load', (e) => {
             document.getElementById("nail_damage").value = nailDamage;
             document.getElementById("boss_health").value = bossHealth;
-            updateUi();   
+            updateUi();
         });
 
     </script>
